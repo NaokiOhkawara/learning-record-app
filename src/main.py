@@ -1,5 +1,6 @@
 from fastapi import FastAPI, Request, Form
 from fastapi.templating import Jinja2Templates
+from fastapi.responses import RedirectResponse
 import sqlite3
 
 app = FastAPI()
@@ -49,6 +50,8 @@ def create_record(
     content: str = Form(...),
     study_time: int = Form(...)
 ):
+    if study_time < 1:
+        return {"error": "学習時間は1分以上で入力してください"}
     connection = sqlite3.connect("study_records.db")
 
     connection.execute(
@@ -67,13 +70,8 @@ def create_record(
     connection.commit()
     connection.close()
 
-    return {
-        "message": "登録しました",
-        "study_date": study_date,
-        "category": category,
-        "content": content,
-        "study_time": study_time
-    }
+    return RedirectResponse(url="/", status_code=303)
+
 @app.get("/records/{record_id}/edit")
 def edit_record(request: Request, record_id: int):
     connection = sqlite3.connect("study_records.db")
@@ -122,7 +120,7 @@ def update_record(
     connection.commit()
     connection.close()
 
-    return {"message": "更新しました"}
+    return RedirectResponse(url="/", status_code=303)
 
 @app.post("/records/{record_id}/delete")
 def delete_record(record_id: int):
@@ -136,4 +134,4 @@ def delete_record(record_id: int):
     connection.commit()
     connection.close()
 
-    return {"message": "削除しました"}
+    return RedirectResponse(url="/", status_code=303)
