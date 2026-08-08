@@ -1,9 +1,11 @@
 from fastapi import FastAPI, Request, Form
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import RedirectResponse
+from fastapi.staticfiles import StaticFiles
 import sqlite3
 
 app = FastAPI()
+app.mount("/static", StaticFiles(directory="src/static"), name="static")
 
 def init_db():
     connection = sqlite3.connect("study_records.db")
