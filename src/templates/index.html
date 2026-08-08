@@ -10,7 +10,7 @@
 
     <h2>学習記録を追加</h2>
 
-   <form action="/records" method="post">
+    <form action="/records" method="post">
         <div>
             <label for="study-date">学習日</label>
             <input type="date" id="study-date" name="study_date">
@@ -33,5 +33,42 @@
 
         <button type="submit">登録する</button>
     </form>
+
+    <h2>学習記録一覧</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>学習日</th>
+                <th>カテゴリ</th>
+                <th>学習内容</th>
+                <th>学習時間</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for record in records %}
+            <tr>
+                <td>{{ record["study_date"] }}</td>
+                <td>{{ record["category"] }}</td>
+                <td>{{ record["content"] }}</td>
+                <td>{{ record["study_time"] }} 分</td>
+
+                <td>
+                    <a href="/records/{{ record['id'] }}/edit">編集</a>
+
+                    <form
+                        action="/records/{{ record['id'] }}/delete"
+                        method="post"
+                        style="display:inline;"
+                    >
+                        <button type="submit">削除</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </body>
 </html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>学習記録を編集</title>
+</head>
+<body>
+    <h1>学習記録を編集</h1>
+
+    <form action="/records/{{ record['id'] }}/edit" method="post">
+        <div>
+            <label>学習日</label>
+            <input
+                type="date"
+                name="study_date"
+                value="{{ record['study_date'] }}"
+            >
+        </div>
+
+        <div>
+            <label>カテゴリ</label>
+            <input
+                type="text"
+                name="category"
+                value="{{ record['category'] }}"
+            >
+        </div>
+
+        <div>
+            <label>学習内容</label>
+            <input
+                type="text"
+                name="content"
+                value="{{ record['content'] }}"
+            >
+        </div>
+
+        <div>
+            <label>学習時間（分）</label>
+            <input
+                type="number"
+                name="study_time"
+                value="{{ record['study_time'] }}"
+            >
+        </div>
+
+        <button type="submit">更新する</button>
+    </form>
+
+    <a href="/">戻る</a>
+</body>
+</html>
