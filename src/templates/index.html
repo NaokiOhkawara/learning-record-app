@@ -4,8 +4,34 @@
     <meta charset="UTF-8">
     <title>学習記録アプリ</title>
 </head>
+
 <body>
     <h1>学習記録アプリ</h1>
-    <p>ここから学習記録を管理していきます。</p>
+
+    <h2>学習記録を追加</h2>
+
+   <form action="/records" method="post">
+        <div>
+            <label for="study-date">学習日</label>
+            <input type="date" id="study-date" name="study_date">
+        </div>
+
+        <div>
+            <label for="category">カテゴリ</label>
+            <input type="text" id="category" name="category">
+        </div>
+
+        <div>
+            <label for="content">学習内容</label>
+            <input type="text" id="content" name="content">
+        </div>
+
+        <div>
+            <label for="study-time">学習時間（分）</label>
+            <input type="number" id="study-time" name="study_time">
+        </div>
+
+        <button type="submit">登録する</button>
+    </form>
 </body>
 </html>

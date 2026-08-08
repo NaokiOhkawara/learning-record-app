@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request, Form
 from fastapi.templating import Jinja2Templates
 
 app = FastAPI()
@@ -12,3 +12,18 @@ def home(request: Request):
         request=request,
         name="index.html"
     )
+
+
+@app.post("/records")
+def create_record(
+    study_date: str = Form(...),
+    category: str = Form(...),
+    content: str = Form(...),
+    study_time: int = Form(...)
+):
+    return {
+        "study_date": study_date,
+        "category": category,
+        "content": content,
+        "study_time": study_time
+    }
